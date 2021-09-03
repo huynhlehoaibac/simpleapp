@@ -1,0 +1,34 @@
+server.port: 8010
+
+spring:
+  application:
+    name: simpleapp
+#  cloud:
+#    gateway:
+#      discovery:
+#        locator:
+#          enabled: true
+  security:
+    oauth2:
+      client:
+        registration:
+          simpleapp:
+            provider: spring
+            client-id: simpleapp
+            client-secret: 123456
+            authorization-grant-type: authorization_code
+            redirect-uri: http://127.0.0.1:8010/login/oauth2/code/{registrationId}
+            scope: openid,cart
+            client-name: simpleapp
+            client-authentication-method: client_secret_post
+        provider:
+          spring:
+            issuer-uri: http://auth-server:9000
+
+#eureka:
+#  instance:
+#    appname: simpleapp-service
+#  client:
+#    fetchRegistry: true
+#    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka
